@@ -6,20 +6,28 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import bgMemory from "@/assets/bg-memory.png";
-import m1 from "@/assets/memory-1.jpg";
-import m2 from "@/assets/memory-2.jpg";
-import m3 from "@/assets/memory-3.jpg";
-import m4 from "@/assets/memory-4.jpg";
-import m5 from "@/assets/memory-5.jpg";
-import m6 from "@/assets/memory-6.jpg";
+import m1 from "@/assets/image.png";
+import m2 from "@/assets/image copy.png";
+import m3 from "@/assets/image copy 2.jpeg";
+import m4 from "@/assets/image copy 3.png";
+import m5 from "@/assets/image copy 4.png";
+import m6 from "@/assets/image copy 5.png";
+import m7 from "@/assets/memory-1.png";
+import m8 from "@/assets/WhatsApp Image 2026-05-25 at 7.17.15 PM.jpeg";
+import m9 from "@/assets/WhatsApp Image 2026-05-25 at 7.18.04 PM.jpeg";
+import m10 from "@/assets/profile-custom.jpg";
 
 const MEMORIES = [
-  { src: m1, caption: "Sunny afternoons together" },
-  { src: m2, caption: "Sweet little celebrations" },
-  { src: m3, caption: "Dreams that floated higher" },
-  { src: m4, caption: "Walks beneath the blossoms" },
-  { src: m5, caption: "Quiet nights, glowing hearts" },
-  { src: m6, caption: "Words I couldn't say out loud" },
+  { src: m5 },
+  { src: m2 },
+  { src: m3 },
+  { src: m4 },
+  { src: m9 },
+  { src: m6 },
+  { src: m8 },
+  { src: m7 },
+  { src: m1 },
+  { src: m10 },
 ];
 
 export function MemoryScene({ onContinue }: { onContinue: () => void }) {
@@ -86,7 +94,7 @@ export function MemoryScene({ onContinue }: { onContinue: () => void }) {
         >
           {MEMORIES.map((m, i) => (
             <SwiperSlide key={i} style={{ width: 260 }}>
-              <Polaroid src={m.src} caption={m.caption} tilt={i % 2 === 0 ? -4 : 4} />
+              <Polaroid src={m.src} tilt={i % 2 === 0 ? -4 : 4} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -127,7 +135,7 @@ export function MemoryScene({ onContinue }: { onContinue: () => void }) {
   );
 }
 
-function Polaroid({ src, caption, tilt }: { src: string; caption: string; tilt: number }) {
+function Polaroid({ src, tilt }: { src: string; caption: string; tilt: number }) {
   return (
     <motion.div
       whileHover={{ scale: 1.05, rotate: 0, boxShadow: "0 30px 60px -20px rgba(255,95,162,0.6)" }}
@@ -135,10 +143,10 @@ function Polaroid({ src, caption, tilt }: { src: string; caption: string; tilt: 
       className="bg-cream/95 p-3 pb-10 rounded-sm shadow-xl"
     >
       <div className="w-full aspect-square overflow-hidden bg-black/10">
-        <img src={src} alt={caption} loading="lazy" className="w-full h-full object-cover" />
+        <img src={src} loading="lazy" className="w-full h-full object-cover" />
       </div>
       <p className="mt-3 text-center font-script text-lg text-cocoa" style={{ color: "var(--cocoa)" }}>
-        {caption}
+
       </p>
     </motion.div>
   );

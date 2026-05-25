@@ -11,7 +11,7 @@ interface LoveCardSceneProps {
 
 export function LoveCardScene({
   name = "Prani",
-  message = "My love. You are a very special person. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you. 💕",
+  message = "Nee gurunchi rayali ante chala undhi kani ippudu kastam but nuvvu chala manchi pillavai evarni emi anav,cuteeuu,sweetuu, brave ,loyal , super character , full energy ,andhariki help chesthav , kani konchem emotional ani naaku anipichindhi but eppudu happy ga undu ,neetho matladadam naaku oka varam eppudu anthe matladuthuu undu😁, malli kaludham ani waitinggg ,ikkada varake pattindhi sooo antheee inka unnai le but tarvatha cheptha le  . 💕",
   onContinue,
 }: LoveCardSceneProps) {
   const [size, setSize] = useState({ w: 0, h: 0 });

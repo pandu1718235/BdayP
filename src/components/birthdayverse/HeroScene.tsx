@@ -4,7 +4,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { Balloons } from "./Balloons";
 import { Sparkles } from "./Sparkles";
 import FloatingBalloons from "./FloatingBalloons";
-import profilePlaceholder from "@/assets/profile-placeholder.jpg";
+import profilePlaceholder from "@/assets/profile-custom.jpg";
 import bgR from "@/assets/r.jpg";
 import hatImage from "@/assets/hat.png";
 
