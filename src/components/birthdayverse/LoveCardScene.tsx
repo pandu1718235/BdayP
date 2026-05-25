@@ -10,7 +10,7 @@ interface LoveCardSceneProps {
 }
 
 export function LoveCardScene({
-  name = "Your Name",
+  name = "Prani",
   message = "My love. You are a very special person. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you. 💕",
   onContinue,
 }: LoveCardSceneProps) {
@@ -23,56 +23,83 @@ export function LoveCardScene({
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center px-6 py-20"
-      style={{ background: "linear-gradient(180deg, oklch(0.22 0.03 30), oklch(0.16 0.02 30))" }}>
+    <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center px-4 md:px-6 py-20"
+      style={{
+        backgroundColor: '#1a1516',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' transform='scale(0.8) translate(10, 10)' fill='%2338272b' opacity='0.5'/%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' transform='scale(0.5) translate(100, 80)' fill='%2338272b' opacity='0.5'/%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' transform='scale(0.6) translate(40, 120)' fill='%2338272b' opacity='0.5'/%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' transform='scale(0.7) translate(120, 20)' fill='%2338272b' opacity='0.5'/%3E%3C/svg%3E")`
+      }}>
+
       <ReactConfetti
         width={size.w}
         height={size.h}
-        numberOfPieces={120}
+        numberOfPieces={80}
         recycle={false}
-        colors={["#FF9EB5", "#F8D7E8", "#FF5FA2", "#FFF7FB", "#FFAFCC"]}
+        colors={["#fbcfe8", "#f9a8d4", "#f472b6", "#e879f9", "#38bdf8", "#fde047"]}
       />
-      <FloatingHearts count={12} />
+      <FloatingHearts count={15} />
 
       <motion.div
-        initial={{ scale: 0.6, opacity: 0, y: 40 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 120, damping: 18 }}
-        className="relative max-w-3xl w-full rounded-3xl overflow-hidden"
+        initial={{ scale: 0.8, opacity: 0, rotate: -3 }}
+        animate={{ scale: 1, opacity: 1, rotate: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 15 }}
+        className="relative max-w-3xl w-full rounded-md overflow-hidden shadow-2xl"
         style={{
-          background: "linear-gradient(135deg, oklch(0.24 0.04 30), oklch(0.18 0.03 30))",
-          border: "1px solid color-mix(in oklab, var(--rose-pink) 30%, transparent)",
-          boxShadow: "0 30px 80px -20px rgba(255,95,162,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset",
+          backgroundColor: "#ffffff", // Pure white notebook paper
+          backgroundImage: "repeating-linear-gradient(transparent, transparent 31px, #e0f2fe 31px, #e0f2fe 32px)", // Light blue ruled lines
+          backgroundPosition: "0 32px",
+          color: "#334155" // Dark slate pen color
         }}
       >
-        <div className="p-8 md:p-12">
-          <h3 className="font-script text-4xl text-center mb-2" style={{ color: "var(--cream)" }}>
-            To {name} <span style={{ color: "var(--heart)" }}>❤</span>
-          </h3>
-          <div className="mx-auto w-24 h-px my-6" style={{ background: "var(--rose-pink)" }} />
+        {/* Notebook Margins */}
+        <div className="absolute top-0 bottom-0 left-8 md:left-12 w-px bg-red-400 opacity-60" />
+        <div className="absolute top-0 bottom-0 left-[36px] md:left-[52px] w-px bg-red-400 opacity-30" />
 
-          <div className="grid md:grid-cols-[1fr_2px_1.4fr] gap-8 items-center">
-            {/* Bunny */}
-            <div className="flex justify-center">
-              <Bunny />
-            </div>
-            <div className="hidden md:block w-px h-48" style={{ background: "color-mix(in oklab, var(--rose-pink) 40%, transparent)" }} />
-            <p className="font-script text-xl md:text-2xl leading-relaxed text-cream/90">
-              {message}
-            </p>
+        <div className="pt-8 pb-8 pr-4 pl-12 md:pt-12 md:pb-12 md:pr-12 md:pl-20 relative z-10">
+
+          {/* Title like reference */}
+          <div className="mb-4 md:mb-6 rotate-[-2deg] flex justify-center">
+            <h3 className="font-script text-3xl md:text-6xl text-center text-pink-500 font-bold uppercase tracking-wider leading-relaxed" style={{ textShadow: "2px 2px 0px #fbcfe8" }}>
+              To Prani <span className="text-yellow-400 text-2xl md:text-5xl inline-block rotate-12" style={{ textShadow: "none" }}>★</span>
+            </h3>
           </div>
 
-          {/* Small hearts */}
-          <div className="absolute top-6 right-8 text-2xl animate-float-y" style={{ color: "var(--heart)" }}>♥</div>
-          <div className="absolute bottom-6 left-8 text-xl animate-float-y" style={{ color: "var(--soft-pink)", animationDelay: "1.2s" }}>♥</div>
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+            {/* Bunny GIF */}
+            <div className="flex justify-center w-full md:w-1/3 shrink-0 relative z-20">
+              <div className="absolute -inset-4 bg-yellow-100 rounded-full blur-xl opacity-50 -z-10"></div>
+              <BunnyGif />
+            </div>
 
-          <div className="mt-10 flex justify-center">
+            <div className="md:w-2/3">
+              <p className="font-script text-2xl md:text-3xl leading-[32px] text-slate-700 whitespace-pre-line">
+                {message}
+              </p>
+            </div>
+          </div>
+
+          {/* Doodles (absolute inside card) */}
+          <svg className="absolute top-6 right-6 md:top-8 md:right-12 w-10 h-10 text-yellow-400 -rotate-12 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+          <svg className="absolute bottom-24 right-10 md:bottom-16 md:right-12 w-8 h-8 text-blue-400 rotate-12 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+
+          <div className="absolute top-16 md:top-24 left-1/2 md:left-2/3 text-xl md:text-2xl text-pink-300 font-script rotate-12 opacity-80 pointer-events-none">
+            xoxo
+          </div>
+          <div className="absolute bottom-4 left-6 md:bottom-10 md:left-24 text-xl md:text-3xl text-zinc-400 font-script -rotate-12 opacity-80 pointer-events-none">
+            Your's Best boy ♥
+          </div>
+
+          <div className="mt-8 md:mt-12 flex justify-end md:justify-center pr-4 md:pr-0">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotate: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={onContinue}
-              className="btn-glow rounded-full px-7 py-3 font-script text-xl"
+              className="bg-pink-400 hover:bg-pink-500 text-white shadow-lg rounded-lg px-8 py-3 font-script text-xl md:text-2xl border-2 border-pink-500 border-dashed transition-colors max-w-sm text-center"
             >
-              Our memories →
+              Next💝
             </motion.button>
           </div>
         </div>
@@ -81,34 +108,32 @@ export function LoveCardScene({
   );
 }
 
-function Bunny() {
+function BunnyGif() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://tenor.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
-    <div className="relative w-40 h-44">
-      {/* Ears */}
-      <div className="absolute left-6 top-0 w-5 h-16 rounded-full" style={{ background: "white" }}>
-        <div className="absolute inset-x-1 top-2 bottom-2 rounded-full" style={{ background: "#FFD0DE" }} />
-      </div>
-      <div className="absolute right-6 top-0 w-5 h-16 rounded-full" style={{ background: "white" }}>
-        <div className="absolute inset-x-1 top-2 bottom-2 rounded-full" style={{ background: "#FFD0DE" }} />
-      </div>
-      {/* Head */}
-      <div className="absolute left-1/2 top-8 -translate-x-1/2 w-28 h-28 rounded-full" style={{ background: "white", boxShadow: "0 8px 20px -4px rgba(0,0,0,0.4)" }}>
-        {/* eyes */}
-        <div className="absolute left-6 top-12 w-2 h-2 rounded-full bg-black" />
-        <div className="absolute right-6 top-12 w-2 h-2 rounded-full bg-black" />
-        {/* cheeks */}
-        <div className="absolute left-3 top-16 w-4 h-3 rounded-full" style={{ background: "#FFB5C8", filter: "blur(1px)" }} />
-        <div className="absolute right-3 top-16 w-4 h-3 rounded-full" style={{ background: "#FFB5C8", filter: "blur(1px)" }} />
-      </div>
-      {/* Heart */}
-      <motion.div
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 1.2, repeat: Infinity }}
-        className="absolute left-1/2 -translate-x-1/2 bottom-0 text-4xl"
-        style={{ color: "var(--rose-pink)" }}
+    <div className="w-full max-w-[200px]">
+      <div
+        className="tenor-gif-embed"
+        data-postid="8725168587126957863"
+        data-share-method="host"
+        data-aspect-ratio="1.32515"
+        data-width="100%"
       >
-        ♥
-      </motion.div>
+        <a href="https://tenor.com/view/bunny-love-gif-8725168587126957863">Bunny Love Sticker</a>
+        from <a href="https://tenor.com/search/bunny-stickers">Bunny Stickers</a>
+      </div>
     </div>
   );
 }

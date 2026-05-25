@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCoverflow } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
 import bgMemory from "@/assets/bg-memory.png";
 import m1 from "@/assets/memory-1.jpg";
 import m2 from "@/assets/memory-2.jpg";
@@ -21,6 +23,9 @@ const MEMORIES = [
 ];
 
 export function MemoryScene({ onContinue }: { onContinue: () => void }) {
+  const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
+  const allViewed = viewedSlides.size >= MEMORIES.length;
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden py-16 px-4 flex flex-col items-center"
       style={{
@@ -62,13 +67,22 @@ export function MemoryScene({ onContinue }: { onContinue: () => void }) {
 
       <div className="w-full max-w-5xl">
         <Swiper
-          modules={[Autoplay, EffectCoverflow]}
+          modules={[Autoplay, EffectCoverflow, Navigation]}
           effect="coverflow"
+          navigation
           centeredSlides
           slidesPerView="auto"
           loop
           autoplay={{ delay: 2400, disableOnInteraction: false }}
           coverflowEffect={{ rotate: 30, stretch: 0, depth: 140, modifier: 1, slideShadows: false }}
+          onSlideChange={(swiper) => {
+            setViewedSlides(prev => {
+              if (prev.has(swiper.realIndex)) return prev;
+              const next = new Set(prev);
+              next.add(swiper.realIndex);
+              return next;
+            });
+          }}
         >
           {MEMORIES.map((m, i) => (
             <SwiperSlide key={i} style={{ width: 260 }}>
@@ -78,13 +92,37 @@ export function MemoryScene({ onContinue }: { onContinue: () => void }) {
         </Swiper>
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        onClick={onContinue}
-        className="mt-12 btn-glow rounded-full px-7 py-3 font-script text-xl"
-      >
-        One last thing →
-      </motion.button>
+      <style>{`
+        .swiper-button-next, .swiper-button-prev {
+          color: var(--rose-pink, #f43f5e) !important;
+          background: rgba(255, 255, 255, 0.8);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+          font-size: 18px !important;
+          font-weight: bold;
+        }
+      `}</style>
+
+      <div className="mt-8 flex flex-col items-center gap-3">
+        {!allViewed && (
+          <p className="text-sm md:text-base font-sans text-rose-200 animate-pulse font-medium tracking-wide">
+            Wait for all images
+          </p>
+        )}
+        <motion.button
+          whileHover={{ scale: allViewed ? 1.05 : 1 }}
+          onClick={onContinue}
+          disabled={!allViewed}
+          className={`btn-glow rounded-full px-7 py-3 font-script text-xl transition-all duration-300 ${!allViewed ? "opacity-40 grayscale cursor-not-allowed" : ""
+            }`}
+        >
+          Next Page →
+        </motion.button>
+      </div>
     </section>
   );
 }

@@ -5,6 +5,7 @@ import { HeroScene } from "@/components/birthdayverse/HeroScene";
 import { CountdownScene } from "@/components/birthdayverse/CountdownScene";
 import { CakeScene } from "@/components/birthdayverse/CakeScene";
 import { LoveCardScene } from "@/components/birthdayverse/LoveCardScene";
+import { WishScene } from "@/components/birthdayverse/WishScene";
 import { MemoryScene } from "@/components/birthdayverse/MemoryScene";
 import { EndingScene } from "@/components/birthdayverse/EndingScene";
 import { MusicToggle } from "@/components/birthdayverse/MusicToggle";
@@ -23,13 +24,13 @@ export const Route = createFileRoute("/")({
 
 // 🎀 EDIT THESE PLACEHOLDERS WHEN READY
 const CONFIG = {
-  name: "Your Name",
+  name: "Ammulu",
   date: "DD Month YYYY",
   message:
     "My love. You are a very special person. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you. 💕",
 };
 
-type Scene = "hero" | "countdown" | "cake" | "love" | "memory" | "ending";
+type Scene = "hero" | "countdown" | "cake" | "wish" | "love" | "memory" | "ending";
 
 function Index() {
   const [scene, setScene] = useState<Scene>("hero");
@@ -50,7 +51,8 @@ function Index() {
             <HeroScene name={CONFIG.name} date={CONFIG.date} onStart={() => setScene("countdown")} />
           )}
           {scene === "countdown" && <CountdownScene onComplete={() => setScene("cake")} />}
-          {scene === "cake" && <CakeScene onComplete={() => setScene("love")} />}
+          {scene === "cake" && <CakeScene recipientName={CONFIG.name} onComplete={() => setScene("wish")} />}
+          {scene === "wish" && <WishScene onComplete={() => setScene("love")} />}
           {scene === "love" && (
             <LoveCardScene name={CONFIG.name} message={CONFIG.message} onContinue={() => setScene("memory")} />
           )}
