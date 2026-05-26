@@ -116,11 +116,7 @@ export function MemoryScene({ onContinue }: { onContinue: () => void }) {
       `}</style>
 
       <div className="mt-8 flex flex-col items-center gap-3">
-        {!allViewed && (
-          <p className="text-sm md:text-base font-sans text-rose-200 animate-pulse font-medium tracking-wide">
-            Wait for all images
-          </p>
-        )}
+
         <motion.button
           whileHover={{ scale: allViewed ? 1.05 : 1 }}
           onClick={onContinue}

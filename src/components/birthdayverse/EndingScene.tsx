@@ -13,13 +13,6 @@ export function EndingScene({ onRestart }: { onRestart: () => void }) {
 
   const handleNext = async () => {
     if (step === 0) {
-      if (!experienceText.trim()) {
-        setError("Please fill this out to continue!");
-        return;
-      }
-      setError("");
-      setStep(1);
-    } else if (step === 1) {
       if (!aboutMeText.trim()) {
         setError("you should fill to go to next page");
         return;
@@ -30,7 +23,7 @@ export function EndingScene({ onRestart }: { onRestart: () => void }) {
       try {
         await saveFeedback({
           data: {
-            experience: experienceText,
+            experience: "",
             aboutMe: aboutMeText
           }
         } as any);
@@ -39,7 +32,7 @@ export function EndingScene({ onRestart }: { onRestart: () => void }) {
       }
 
       setIsSubmitting(false);
-      setStep(2);
+      setStep(1);
     }
   };
 
@@ -50,49 +43,9 @@ export function EndingScene({ onRestart }: { onRestart: () => void }) {
       <FloatingHearts count={20} />
 
       <AnimatePresence mode="wait">
-        {step === 0 && (
-          <motion.div
-            key="step0"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            className="relative z-10 max-w-lg w-full bg-white/5 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center"
-          >
-            <h2 className="font-script text-3xl md:text-4xl text-rose-300 mb-6 text-center drop-shadow-lg">
-              Nachindha? ela anipinchindhi?
-            </h2>
-            <textarea
-              className="w-full bg-black/20 border border-rose-300/30 rounded-2xl p-4 text-white placeholder:text-rose-200/40 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent resize-none h-32 mb-2 transition-all"
-              placeholder="Your honest feelings..."
-              value={experienceText}
-              onChange={(e) => setExperienceText(e.target.value)}
-            />
-            <AnimatePresence>
-              {error && (
-                <motion.p
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="text-red-400 text-sm mb-4 font-semibold text-center"
-                >
-                  {error}
-                </motion.p>
-              )}
-            </AnimatePresence>
-            <motion.button
-              whileHover={{ scale: experienceText.trim() ? 1.05 : 1 }}
-              whileTap={{ scale: experienceText.trim() ? 0.95 : 1 }}
-              onClick={handleNext}
-              disabled={!experienceText.trim()}
-              className="w-full mt-4 bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-bold py-3 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <span>Next</span>
-              <Send className="w-5 h-5 flex-shrink-0" />
-            </motion.button>
-          </motion.div>
-        )}
 
-        {step === 1 && (
+
+        {step === 0 && (
           <motion.div
             key="step1"
             initial={{ opacity: 0, x: 50 }}
@@ -137,7 +90,7 @@ export function EndingScene({ onRestart }: { onRestart: () => void }) {
           </motion.div>
         )}
 
-        {step === 2 && (
+        {step === 1 && (
           <motion.div
             key="step2"
             initial={{ scale: 0.5, opacity: 0 }}
